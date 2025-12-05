@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Paramu — Surprise</title>
+<link rel="preload" href="style.css" as="style">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="bg">
+  <div id="cornerLogin" class="corner-login">
+    <button id="cornerBtn" class="corner-btn" title="Login to unlock">🔒</button>
+  </div>
+  <div id="loginModal" class="login-modal hidden" aria-hidden="true">
+    <div class="login-card" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+      <h3 id="loginTitle">Unlock for special viewers</h3>
+      <label>Username<input id="loginUser" type="text" autocomplete="username" placeholder="username"></label>
+      <label>Password<input id="loginPass" type="password" autocomplete="current-password" placeholder="password"></label>
+      <div class="login-actions">
+        <button id="loginSubmit" class="btn">Unlock</button>
+        <button id="loginCancel" class="btn btn-ghost">Cancel</button>
+      </div>
+      <div id="loginFeedback" class="login-feedback" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div id="floatingLayer"></div>
+  <main class="card-wrapper">
+    <div id="loaderCard" class="card center small">
+      <div class="hearts">♡ ♡ ♡</div>
+      <h2 id="loaderTitle">Loading something special...</h2>
+      <p class="emoji-row">🎂 ✨ 🎁 💖 🎈</p>
+    </div>
+
+    <div id="countdownCard" class="card hidden">
+      <h1 id="countTitle">Counting down to your day</h1>
+      <div class="countdown">
+        <div class="timebox"><div class="num" id="days">0</div><div class="label">Days</div></div>
+        <div class="timebox"><div class="num" id="hours">0</div><div class="label">Hours</div></div>
+        <div class="timebox"><div class="num" id="minutes">0</div><div class="label">Minutes</div></div>
+        <div class="timebox"><div class="num" id="seconds">0</div><div class="label">Seconds</div></div>
+      </div>
+      <div class="message">Tap the cake when the day arrives 🎂</div>
+      <div class="cake-area">
+        <div id="cakeButton" class="cake locked" title="Locked">
+          <div class="cake-inner">🎂</div>
+          <div class="cake-name">Paramu</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="finalCard" class="card hidden final-card">
+      <h1 id="finalTitle">A special message for you</h1>
+      <div class="photo-wrap">
+        <img id="finalPhoto" src="assets/paramu_round.webp" alt="Paramu" class="final-photo">
+      </div>
+      <div id="messageBox" class="message-box hidden" aria-hidden="true">
+        <p id="mainMessage" class="main-message"></p>
+        <div class="btn-row">
+          <a id="reopenBtn" class="btn">Reopen</a>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
