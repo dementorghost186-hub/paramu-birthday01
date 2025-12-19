@@ -3,67 +3,153 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Paramu — Surprise</title>
+<title>Paramu — Special Birthday Surprise</title>
 <link rel="preload" href="style.css" as="style">
 <link rel="stylesheet" href="style.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="bg">
-  <div id="cornerLogin" class="corner-login">
-    <button id="cornerBtn" class="corner-btn" title="Login to unlock">🔒</button>
+  <!-- Background effects -->
+  <div class="bg-effects">
+    <div class="heart-bg"></div>
+    <div class="sparkle-bg"></div>
   </div>
+
+  <!-- Corner login button -->
+  <div id="cornerLogin" class="corner-login">
+    <button id="cornerBtn" class="corner-btn" title="Login to unlock">🔓</button>
+  </div>
+
+  <!-- Login modal -->
   <div id="loginModal" class="login-modal hidden" aria-hidden="true">
     <div class="login-card" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
-      <h3 id="loginTitle">Unlock for special viewers</h3>
-      <label>Username<input id="loginUser" type="text" autocomplete="username" placeholder="username"></label>
-      <label>Password<input id="loginPass" type="password" autocomplete="current-password" placeholder="password"></label>
+      <h3 id="loginTitle">🔐 Unlock Special Message</h3>
+      <label>Username<input id="loginUser" type="text" autocomplete="username" placeholder="Enter username"></label>
+      <label>Password<input id="loginPass" type="password" autocomplete="current-password" placeholder="Enter password"></label>
       <div class="login-actions">
-        <button id="loginSubmit" class="btn">Unlock</button>
+        <button id="loginSubmit" class="btn">Unlock Surprise</button>
         <button id="loginCancel" class="btn btn-ghost">Cancel</button>
       </div>
       <div id="loginFeedback" class="login-feedback" aria-hidden="true"></div>
+      <p class="login-hint">Hint: Your name & special date</p>
     </div>
   </div>
 
+  <!-- Floating layer for animations -->
   <div id="floatingLayer"></div>
+  
   <main class="card-wrapper">
+    <!-- Loading Screen -->
     <div id="loaderCard" class="card center small">
-      <div class="hearts">♡ ♡ ♡</div>
-      <h2 id="loaderTitle">Loading something special...</h2>
-      <p class="emoji-row">🎂 ✨ 🎁 💖 🎈</p>
+      <div class="hearts">💖 💖 💖</div>
+      <h2 id="loaderTitle">Loading Your Special Surprise...</h2>
+      <div class="spinner">
+        <div class="heart-spin">💝</div>
+      </div>
+      <p class="emoji-row">🎂 ✨ 🎁 💝 🎈</p>
+      <p class="loader-text">Something beautiful is coming...</p>
     </div>
 
+    <!-- Countdown Screen -->
     <div id="countdownCard" class="card hidden">
-      <h1 id="countTitle">Counting down to your day</h1>
+      <h1 id="countTitle">🎉 Counting Down to Your Special Day! 🎉</h1>
+      <p class="subtitle">A beautiful surprise is waiting for you...</p>
+      
       <div class="countdown">
         <div class="timebox"><div class="num" id="days">0</div><div class="label">Days</div></div>
         <div class="timebox"><div class="num" id="hours">0</div><div class="label">Hours</div></div>
         <div class="timebox"><div class="num" id="minutes">0</div><div class="label">Minutes</div></div>
         <div class="timebox"><div class="num" id="seconds">0</div><div class="label">Seconds</div></div>
       </div>
-      <div class="message">Tap the cake when the day arrives 🎂</div>
+      
+      <div class="message">
+        <div class="message-icon">✨</div>
+        <p>Tap the cake when the countdown reaches zero!</p>
+      </div>
+      
       <div class="cake-area">
-        <div id="cakeButton" class="cake locked" title="Locked">
-          <div class="cake-inner">🎂</div>
-          <div class="cake-name">Paramu</div>
+        <div id="cakeButton" class="cake locked" title="Locked - Wait for your birthday!">
+          <div class="cake-inner">
+            <div class="cake-emoji">🎂</div>
+            <div class="cake-sparkles">✨✨</div>
+          </div>
+          <div class="cake-name">For Paramu 💝</div>
+          <div class="lock-icon">🔒</div>
         </div>
+      </div>
+      
+      <div class="instruction">
+        <p>💝 This is made with lots of love for you!</p>
       </div>
     </div>
 
+    <!-- Final Message Screen -->
     <div id="finalCard" class="card hidden final-card">
-      <h1 id="finalTitle">A special message for you</h1>
-      <div class="photo-wrap">
-        <img id="finalPhoto" src="assets/paramu_round.webp" alt="Paramu" class="final-photo">
-      </div>
-      <div id="messageBox" class="message-box hidden" aria-hidden="true">
-        <p id="mainMessage" class="main-message"></p>
-        <div class="btn-row">
-          <a id="reopenBtn" class="btn">Reopen</a>
+      <h1 id="finalTitle">💌 A Special Message Just For You 💌</h1>
+      
+      <div class="photo-section">
+        <div class="photo-frame">
+          <div class="frame-decoration">✨ ✨ ✨</div>
+          <div class="photo-container">
+            <!-- Put your photo here - rename it to "photo.jpg" and place in same folder -->
+            <img id="finalPhoto" src="photo.jpg" alt="Our special moment" class="final-photo">
+            <div class="photo-overlay">
+              <div class="overlay-text">My Love 💝</div>
+            </div>
+          </div>
+          <div class="frame-hearts">💖 💖 💖</div>
         </div>
+        
+        <!-- Fallback if image not found -->
+        <div id="photoFallback" class="photo-fallback hidden">
+          <div class="fallback-heart">💝</div>
+          <p class="fallback-text">Our Beautiful Memory</p>
+          <p class="fallback-sub">Paramu 💝 You</p>
+        </div>
+      </div>
+      
+      <div class="message-container">
+        <div class="message-header">
+          <div class="envelope">💌</div>
+          <h3>Special Message from Your Love</h3>
+          <div class="envelope">💌</div>
+        </div>
+        
+        <div id="messageBox" class="message-box" aria-hidden="true">
+          <div class="message-scroll">
+            <p id="mainMessage" class="main-message"></p>
+          </div>
+          <div class="message-footer">
+            <div class="signature">With all my love,</div>
+            <div class="signature-name">Your Special Someone 💝</div>
+          </div>
+        </div>
+        
+        <div class="btn-row">
+          <button id="reopenBtn" class="btn reopen-btn">
+            <span class="btn-icon">🔄</span> Read Again
+          </button>
+          <button id="saveBtn" class="btn save-btn">
+            <span class="btn-icon">💾</span> Save Message
+          </button>
+        </div>
+      </div>
+      
+      <div class="final-hearts">
+        💖 💖 💖 💖 💖
       </div>
     </div>
   </main>
+  
+  <!-- Hidden audio for effects -->
+  <audio id="heartSound" preload="auto">
+    <source src="https://assets.mixkit.co/sfx/preview/mixkit-heartbeat-1190.mp3" type="audio/mpeg">
+  </audio>
 </div>
+
 <script src="script.js"></script>
 </body>
 </html>
