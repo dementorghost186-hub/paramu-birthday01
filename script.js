@@ -17,7 +17,7 @@ const DEFAULT_CREDENTIALS = {
 
 // 3. SPECIAL MESSAGE - This appears after unlocking
 // You can modify this message as you like
-const SECRET_MESSAGE = `Adiye Paramu, 💝
+const SECRET_MESSAGE = `Adiye, 💝
 
 Many more happy returns of the day, dee thangapulla! ❤️
 My prayer is that you'll be happy throughout your life...
