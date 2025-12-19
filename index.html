@@ -8,33 +8,76 @@
 <link rel="stylesheet" href="style.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 <div class="bg">
+  <!-- Animated background gradient -->
+  <div class="animated-bg"></div>
+  
+  <!-- Floating particles background -->
+  <div class="particles-container" id="particles"></div>
+  
   <!-- Background effects -->
   <div class="bg-effects">
     <div class="heart-bg"></div>
     <div class="sparkle-bg"></div>
+    <div class="glow-circle glow-1"></div>
+    <div class="glow-circle glow-2"></div>
+    <div class="glow-circle glow-3"></div>
   </div>
 
   <!-- Corner login button -->
   <div id="cornerLogin" class="corner-login">
-    <button id="cornerBtn" class="corner-btn" title="Login to unlock">🔓</button>
+    <button id="cornerBtn" class="corner-btn" title="Login to unlock">
+      <i class="fas fa-lock-open"></i>
+    </button>
+    <div class="tooltip">Unlock early</div>
   </div>
 
   <!-- Login modal -->
   <div id="loginModal" class="login-modal hidden" aria-hidden="true">
     <div class="login-card" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
-      <h3 id="loginTitle">🔐 Unlock Special Message</h3>
-      <label>Username<input id="loginUser" type="text" autocomplete="username" placeholder="Enter username"></label>
-      <label>Password<input id="loginPass" type="password" autocomplete="current-password" placeholder="Enter password"></label>
-      <div class="login-actions">
-        <button id="loginSubmit" class="btn">Unlock Surprise</button>
-        <button id="loginCancel" class="btn btn-ghost">Cancel</button>
+      <div class="login-header">
+        <div class="login-icon">🔐</div>
+        <h3 id="loginTitle">Unlock Special Message</h3>
+        <p class="login-subtitle">Enter the secret code to access the surprise</p>
       </div>
-      <div id="loginFeedback" class="login-feedback" aria-hidden="true"></div>
-      <p class="login-hint">Hint: Your name & special date</p>
+      
+      <div class="login-form">
+        <div class="input-group">
+          <label for="loginUser">
+            <i class="fas fa-user"></i> Username
+          </label>
+          <input id="loginUser" type="text" autocomplete="username" placeholder="Your special name">
+          <div class="input-underline"></div>
+        </div>
+        
+        <div class="input-group">
+          <label for="loginPass">
+            <i class="fas fa-key"></i> Password
+          </label>
+          <input id="loginPass" type="password" autocomplete="current-password" placeholder="Our special date">
+          <div class="input-underline"></div>
+        </div>
+        
+        <div id="loginFeedback" class="login-feedback" aria-hidden="true"></div>
+        
+        <div class="login-actions">
+          <button id="loginSubmit" class="btn btn-login">
+            <span class="btn-sparkle">✨</span>
+            Unlock Surprise
+            <span class="btn-sparkle">✨</span>
+          </button>
+          <button id="loginCancel" class="btn btn-ghost">Cancel</button>
+        </div>
+        
+        <p class="login-hint">
+          <i class="fas fa-lightbulb"></i>
+          Hint: Your name & special date
+        </p>
+      </div>
     </div>
   </div>
 
@@ -47,99 +90,251 @@
       <div class="hearts">💖 💖 💖</div>
       <h2 id="loaderTitle">Loading Your Special Surprise...</h2>
       <div class="spinner">
-        <div class="heart-spin">💝</div>
+        <div class="heart-spin">
+          <i class="fas fa-heart"></i>
+        </div>
+        <div class="spinner-ring"></div>
       </div>
       <p class="emoji-row">🎂 ✨ 🎁 💝 🎈</p>
-      <p class="loader-text">Something beautiful is coming...</p>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+      <p class="loader-text">Preparing something beautiful just for you...</p>
     </div>
 
     <!-- Countdown Screen -->
     <div id="countdownCard" class="card hidden">
-      <h1 id="countTitle">🎉 Counting Down to Your Special Day! 🎉</h1>
-      <p class="subtitle">A beautiful surprise is waiting for you...</p>
-      
-      <div class="countdown">
-        <div class="timebox"><div class="num" id="days">0</div><div class="label">Days</div></div>
-        <div class="timebox"><div class="num" id="hours">0</div><div class="label">Hours</div></div>
-        <div class="timebox"><div class="num" id="minutes">0</div><div class="label">Minutes</div></div>
-        <div class="timebox"><div class="num" id="seconds">0</div><div class="label">Seconds</div></div>
+      <div class="card-header">
+        <div class="header-decoration">
+          <span class="decoration-icon">🎉</span>
+          <span class="decoration-icon">✨</span>
+          <span class="decoration-icon">🎊</span>
+        </div>
+        <h1 id="countTitle">Counting Down to Your Special Day!</h1>
+        <p class="subtitle">A beautiful surprise is waiting for you, Paramu!</p>
       </div>
       
-      <div class="message">
-        <div class="message-icon">✨</div>
-        <p>Tap the cake when the countdown reaches zero!</p>
-      </div>
-      
-      <div class="cake-area">
-        <div id="cakeButton" class="cake locked" title="Locked - Wait for your birthday!">
-          <div class="cake-inner">
-            <div class="cake-emoji">🎂</div>
-            <div class="cake-sparkles">✨✨</div>
+      <div class="countdown-container">
+        <div class="countdown">
+          <div class="timebox">
+            <div class="timebox-inner">
+              <div class="num" id="days">0</div>
+              <div class="label">Days</div>
+            </div>
+            <div class="timebox-glow"></div>
           </div>
-          <div class="cake-name">For Paramu 💝</div>
-          <div class="lock-icon">🔒</div>
+          <div class="timebox">
+            <div class="timebox-inner">
+              <div class="num" id="hours">0</div>
+              <div class="label">Hours</div>
+            </div>
+            <div class="timebox-glow"></div>
+          </div>
+          <div class="timebox">
+            <div class="timebox-inner">
+              <div class="num" id="minutes">0</div>
+              <div class="label">Minutes</div>
+            </div>
+            <div class="timebox-glow"></div>
+          </div>
+          <div class="timebox">
+            <div class="timebox-inner">
+              <div class="num" id="seconds">0</div>
+              <div class="label">Seconds</div>
+            </div>
+            <div class="timebox-glow"></div>
+          </div>
+        </div>
+        
+        <div class="countdown-note">
+          <i class="fas fa-clock"></i>
+          Time until your special moment
         </div>
       </div>
       
-      <div class="instruction">
-        <p>💝 This is made with lots of love for you!</p>
+      <div class="message highlight-box">
+        <div class="message-icon">
+          <i class="fas fa-gift"></i>
+        </div>
+        <p>Tap the cake when the countdown reaches zero to reveal your surprise!</p>
+        <div class="message-arrow">
+          <i class="fas fa-long-arrow-alt-down"></i>
+        </div>
+      </div>
+      
+      <div class="cake-area">
+        <div class="cake-sparkles" id="cakeSparkles">
+          <div class="sparkle"></div>
+          <div class="sparkle"></div>
+          <div class="sparkle"></div>
+          <div class="sparkle"></div>
+          <div class="sparkle"></div>
+        </div>
+        
+        <div id="cakeButton" class="cake locked" title="Locked - Wait for your birthday!">
+          <div class="cake-shine"></div>
+          <div class="cake-inner">
+            <div class="cake-emoji">🎂</div>
+            <div class="cake-candles">
+              <div class="candle"></div>
+              <div class="candle"></div>
+              <div class="candle"></div>
+            </div>
+          </div>
+          <div class="cake-name">
+            <i class="fas fa-heart"></i>
+            For Paramu
+            <i class="fas fa-heart"></i>
+          </div>
+          <div class="lock-icon">
+            <i class="fas fa-lock"></i>
+          </div>
+          <div class="cake-glow"></div>
+        </div>
+        
+        <div class="cake-instruction">
+          <div class="tap-hint">
+            <i class="fas fa-hand-point-up"></i>
+            Tap me when unlocked!
+          </div>
+        </div>
+      </div>
+      
+      <div class="instruction highlight-box">
+        <div class="instruction-icon">
+          <i class="fas fa-heart"></i>
+        </div>
+        <p>This surprise was crafted with endless love and affection just for you, Paramu!</p>
+        <p class="instruction-sub">Every second of this countdown brings us closer to your special moment.</p>
       </div>
     </div>
 
     <!-- Final Message Screen -->
     <div id="finalCard" class="card hidden final-card">
-      <h1 id="finalTitle">💌 A Special Message Just For You 💌</h1>
+      <div class="celebration-overlay" id="celebrationOverlay">
+        <div class="celebration-text">Happy Birthday Paramu!</div>
+      </div>
+      
+      <div class="card-header">
+        <div class="header-decoration">
+          <span class="decoration-icon">💝</span>
+          <span class="decoration-icon">✨</span>
+          <span class="decoration-icon">💝</span>
+        </div>
+        <h1 id="finalTitle">A Special Message Just For You</h1>
+        <p class="subtitle">This moment is dedicated entirely to you, my love</p>
+      </div>
       
       <div class="photo-section">
         <div class="photo-frame">
-          <div class="frame-decoration">✨ ✨ ✨</div>
+          <div class="frame-decoration">
+            <div class="frame-corner tl">✨</div>
+            <div class="frame-corner tr">✨</div>
+            <div class="frame-corner bl">✨</div>
+            <div class="frame-corner br">✨</div>
+          </div>
           <div class="photo-container">
             <!-- Put your photo here - rename it to "photo.jpg" and place in same folder -->
             <img id="finalPhoto" src="photo.jpg" alt="Our special moment" class="final-photo">
             <div class="photo-overlay">
-              <div class="overlay-text">My Love 💝</div>
+              <div class="overlay-text">
+                <i class="fas fa-heart"></i> My Love <i class="fas fa-heart"></i>
+              </div>
+              <div class="overlay-subtext">Paramu & You</div>
             </div>
+            <div class="photo-shine"></div>
           </div>
-          <div class="frame-hearts">💖 💖 💖</div>
+          <div class="frame-hearts">
+            <div class="heart-float">💖</div>
+            <div class="heart-float">💝</div>
+            <div class="heart-float">❤️</div>
+          </div>
         </div>
         
         <!-- Fallback if image not found -->
         <div id="photoFallback" class="photo-fallback hidden">
-          <div class="fallback-heart">💝</div>
-          <p class="fallback-text">Our Beautiful Memory</p>
-          <p class="fallback-sub">Paramu 💝 You</p>
+          <div class="fallback-content">
+            <div class="fallback-heart">
+              <i class="fas fa-heart"></i>
+            </div>
+            <p class="fallback-text">Our Beautiful Memory</p>
+            <p class="fallback-sub">Paramu 💝 You</p>
+            <div class="fallback-hearts">
+              <i class="fas fa-heart"></i>
+              <i class="fas fa-heart"></i>
+              <i class="fas fa-heart"></i>
+            </div>
+          </div>
         </div>
       </div>
       
       <div class="message-container">
         <div class="message-header">
-          <div class="envelope">💌</div>
+          <div class="envelope-left">
+            <i class="fas fa-envelope-open-text"></i>
+          </div>
           <h3>Special Message from Your Love</h3>
-          <div class="envelope">💌</div>
+          <div class="envelope-right">
+            <i class="fas fa-envelope-open-text"></i>
+          </div>
         </div>
         
         <div id="messageBox" class="message-box" aria-hidden="true">
           <div class="message-scroll">
+            <div class="message-border"></div>
             <p id="mainMessage" class="main-message"></p>
+            <div class="message-border"></div>
           </div>
           <div class="message-footer">
-            <div class="signature">With all my love,</div>
-            <div class="signature-name">Your Special Someone 💝</div>
+            <div class="signature-line"></div>
+            <div class="signature">
+              <div class="signature-text">With all my love, forever and always</div>
+              <div class="signature-name">
+                <i class="fas fa-heart"></i>
+                Your Special Someone
+                <i class="fas fa-heart"></i>
+              </div>
+            </div>
           </div>
         </div>
         
         <div class="btn-row">
           <button id="reopenBtn" class="btn reopen-btn">
-            <span class="btn-icon">🔄</span> Read Again
+            <span class="btn-icon">
+              <i class="fas fa-redo"></i>
+            </span>
+            Read Again
           </button>
           <button id="saveBtn" class="btn save-btn">
-            <span class="btn-icon">💾</span> Save Message
+            <span class="btn-icon">
+              <i class="fas fa-download"></i>
+            </span>
+            Save Message
+          </button>
+          <button id="shareBtn" class="btn share-btn">
+            <span class="btn-icon">
+              <i class="fas fa-share-alt"></i>
+            </span>
+            Share Love
           </button>
         </div>
       </div>
       
-      <div class="final-hearts">
-        💖 💖 💖 💖 💖
+      <div class="final-footer">
+        <div class="final-hearts">
+          <div class="heart-anim">💖</div>
+          <div class="heart-anim">💝</div>
+          <div class="heart-anim">❤️</div>
+          <div class="heart-anim">💕</div>
+          <div class="heart-anim">💞</div>
+        </div>
+        <p class="final-note">
+          Made with <i class="fas fa-heart"></i> for Paramu's Special Day
+        </p>
+        <div class="final-date">
+          <i class="far fa-calendar-alt"></i>
+          December 20, 2025
+        </div>
       </div>
     </div>
   </main>
@@ -147,6 +342,16 @@
   <!-- Hidden audio for effects -->
   <audio id="heartSound" preload="auto">
     <source src="https://assets.mixkit.co/sfx/preview/mixkit-heartbeat-1190.mp3" type="audio/mpeg">
+  </audio>
+  
+  <!-- Background music (optional) -->
+  <audio id="bgMusic" loop preload="auto" volume="0.3">
+    <source src="https://assets.mixkit.co/music/preview/mixkit-clear-love-709.mp3" type="audio/mpeg">
+  </audio>
+  
+  <!-- Celebration sound -->
+  <audio id="celebrationSound" preload="auto">
+    <source src="https://assets.mixkit.co/sfx/preview/mixkit-happy-crowd-laugh-464.mp3" type="audio/mpeg">
   </audio>
 </div>
 
